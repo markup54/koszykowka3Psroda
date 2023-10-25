@@ -29,6 +29,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        binding.button2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        punkty+=2;
+                        binding.textView.setText(punkty.toString());
+                    }
+                }
+        );
+        binding.button3.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        punkty+=3;
+                        binding.textView.setText(punkty.toString());
+                    }
+                }
+        );
 
     }
 }
