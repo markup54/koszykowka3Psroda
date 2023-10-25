@@ -1,18 +1,28 @@
 package pl.zabrze.zs10.myapplication;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class PunktyViewModel extends ViewModel {
-    private int punkty;
+    private MutableLiveData<Integer> punkty;
 
-    public int getPunkty() {
+    public MutableLiveData<Integer> getPunkty() {
+        if(punkty == null) {
+            punkty = new MutableLiveData<>();
+            punkty.setValue(0);
+        }
         return punkty;
     }
 
-    public void setPunkty(int punkty) {
+    public void setPunkty(MutableLiveData<Integer> punkty) {
         this.punkty = punkty;
     }
+
     public void dodajPunkty(int ile){
-        punkty+=ile;
+        if(punkty.getValue() == null){
+            punkty.setValue(0);
+        }else {
+            punkty.setValue(punkty.getValue()+ile);
+        }
     }
 }
