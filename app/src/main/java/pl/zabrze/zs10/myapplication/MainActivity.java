@@ -1,6 +1,7 @@
 package pl.zabrze.zs10.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import pl.zabrze.zs10.myapplication.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding; //nazwa od pliku xml
-    private Integer punkty =0 ;
+    private PunktyViewModel punktyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +20,16 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        punktyViewModel = new ViewModelProvider(this)
+                .get(PunktyViewModel.class);
+        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
         binding.button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty++;
-                        binding.textView.setText(punkty.toString());
+                        punktyViewModel.dodajPunkty(1);
+                        binding.textView
+                                .setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -33,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty+=2;
-                        binding.textView.setText(punkty.toString());
+                        punktyViewModel.dodajPunkty(2);
+                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -42,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty+=3;
-                        binding.textView.setText(punkty.toString());
+                       punktyViewModel.dodajPunkty(3);
+                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
